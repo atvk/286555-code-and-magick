@@ -21,31 +21,37 @@ window.renderStatistics = function(ctx, names, times) {
       max = time;
     }
   }
+
   var historamHeight = 150;
   var step =  historamHeight/max;
   var indent = 90;
   var initialX = 150;
-  var initialY = 90;
+  var initialY = 230;
   var nameinitialY = 260;
-  var barWidth = 40;
+  var timeinitialY = 80;
+  var ColumnWidth = 40;
+
+
 
   for(var i = 0; i < names.length; i++) {
     var name = names[i];
     if (name === 'Вы') {
 
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      ctx.fillRect(initialX + indent * i, initialY + 10, barWidth, times[i] * step);
+      ctx.fillRect(initialX + indent * i, initialY + 10, ColumnWidth, -times[i] * step);
       ctx.fillStyle = 'black';
       ctx.fillText(names[i], initialX + indent*i, nameinitialY);
-      ctx.fillText(times[i].toFixed(0), initialX + indent*i, initialY);
+      ctx.fillText(times[i].toFixed(0), initialX + indent*i, timeinitialY);
 
     } else {
 
-      ctx.fillStyle = 'rgba(0, 0, 160, 1)';
-      ctx.fillRect(initialX + indent * i, initialY + 10, barWidth, times[i] * step);
-      ctx.fillStyle = 'black';
-      ctx.fillText(names[i], initialX + indent*i, nameinitialY);
-      ctx.fillText(times[i].toFixed(0), initialX + indent*i, initialY);
+        var getColor = Math.random();
+        ctx.fillStyle = 'rgba(0, 0, 255, '  +  getColor + ' )';
+        ctx.fillRect(initialX + indent * i, initialY + 10, ColumnWidth, -times[i] * step);
+        ctx.fillStyle = 'black';
+        ctx.fillText(names[i], initialX + indent*i, nameinitialY);
+        ctx.fillText(times[i].toFixed(0), initialX + indent*i, timeinitialY);
+
+      }
     }
-  }
 };
