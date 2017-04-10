@@ -45,13 +45,23 @@ window.renderStatistics = function(ctx, names, times) {
 
     } else {
 
-        var getColor = Math.random();
-        ctx.fillStyle = 'rgba(0, 0, 255, '  +  getColor + ' )';
-        ctx.fillRect(initialX + indent * i, initialY + 10, ColumnWidth, -times[i] * step);
-        ctx.fillStyle = 'black';
-        ctx.fillText(names[i], initialX + indent*i, nameinitialY);
-        ctx.fillText(times[i].toFixed(0), initialX + indent*i, timeinitialY);
+            function getRandomOpacity(min, max) {
 
-      }
+                  return Math.random() * (max - min) + min;
+            }
+
+            function getColorWithRandomOpacity() {
+
+                  return 'rgba(0, 0, 255, ' + getRandomOpacity(0.2, 1) + ')'
+
+            }
+
+    ctx.fillStyle = getColorWithRandomOpacity();
+    ctx.fillRect(initialX + indent * i, initialY + 10, ColumnWidth, -times[i] * step);
+    ctx.fillStyle = 'black';
+    ctx.fillText(names[i], initialX + indent*i, nameinitialY);
+    ctx.fillText(times[i].toFixed(0), initialX + indent*i, timeinitialY);
+
     }
+  }
 };
